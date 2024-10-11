@@ -1,4 +1,4 @@
-import LocationService from '../services/location.service.js';
+import LocationService from '../services/location-service/location.service.js';
 
 class LocationController {
 

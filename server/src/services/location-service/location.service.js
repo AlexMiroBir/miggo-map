@@ -1,5 +1,5 @@
 import axios from 'axios';
-import FileService from './file.service.js';
+import FileService from '../file-service/file.service.js';
 
 class LocationService {
 
@@ -9,7 +9,7 @@ class LocationService {
         if (locationData.message=== 'success') {
             await FileService.addLocation(locationData);
         }
-        const locations = await FileService.readLocationHistory();
+        const locations = await FileService.getLocationHistoryFromFile();
         return locations.reduce((acc, location) => {
             const {latitude, longitude} = location.iss_position
             acc.push( {

@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import LocationRoutes from './routes/locationRoutes.js';
-import FileService from './services/file.service.js';
+import LocationRoutes from './routes/location-routes.js';
+import FileService from './services/file-service/file.service.js';
 import UnknownRoutesHandler from './middlewares/unknown-routes-handler.js';
 import ErrorHandler from './middlewares/error-handler.js';
+import {PORT} from './constants.js';
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.use('*', UnknownRoutesHandler)
 app.use(ErrorHandler)
 
 
-app.listen(3008, () => {
-    console.log("Server started on port 3008");
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 })
+
+export default app;
