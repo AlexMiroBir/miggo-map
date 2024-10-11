@@ -16,12 +16,15 @@ The Project includes two parts (server+client)
 
 Client:
 React js (SPA)
-Comamnd to start client: "cd client && npm run start"
+Comamnds to start client: "cd client" -> "npm install" -> "npm start"
+client will be available by: http://localhost:3000
 
 Server: 
 Node js, Express JS Restful API
-Command to start server in dev mode: "cd server && npm run dev"
+Commands to start server in dev mode: "cd server" -> "npm install" ->  "npm run dev"
 Command to start unit tests while server runs: "npm run test"
+sever will be available by: http://localhost:3008
+
 
 Storage: 
 For storaging location history there is a JSON file in the root of server directory: location-history.json
