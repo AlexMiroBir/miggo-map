@@ -10,7 +10,7 @@ Restrictions:
  - The map is implemented in 2D it is impossible to draw an infinite track, the station flies around the earth. Therefore, reaching the "anti meridian" the track continues to be drawn on the left side
  - For Velocity, Period, Heigth was used mock data (not real)
 
-![image](https://github.com/user-attachments/assets/b766c322-fab0-4650-9dba-3ad0cff73d8f)
+![image](https://github.com/user-attachments/assets/51f71e61-322c-4747-811e-94c36d978aa7)
 
 The Project includes two parts (server+client)
 
