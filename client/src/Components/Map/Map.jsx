@@ -1,12 +1,42 @@
-import React, {useEffect} from 'react';
-import {MapContainer, Marker, Popup, TileLayer, Polyline, useMap} from 'react-leaflet'
+import React, {useEffect, useState} from 'react';
+import {MapContainer, Marker, TileLayer, Polyline, useMap, useMapEvents} from 'react-leaflet'
 import styles from './Map.module.css'
 import L from "leaflet";
 
+const ZOOM = 0
 
-const ZOOM = 1
+const ZoomListener = ({setZoom}) => {
+    const map = useMapEvents({
+        zoomend: () => {
+            setZoom(map.getZoom());
+        }
+    });
+    return null;
+};
 
-const Map = ({locations, coordinates = [43.274, -115.983]}) => {
+const MapUpdater = ({coordinates, zoom}) => {
+    const map = useMap();
+
+    useEffect(() => {
+        if (coordinates.length > 0) {
+            map.setView(coordinates.at(-1), zoom);
+        }
+    }, [coordinates, map]);
+
+    return null;
+};
+
+
+const Map = ({coordinates}) => {
+
+    const [zoom, setZoom] = useState(() => {
+        const savedZoom = localStorage.getItem('mapZoom');
+        return savedZoom ? JSON.parse(savedZoom) : ZOOM;
+    });
+
+    useEffect(() => {
+        localStorage.setItem('mapZoom', JSON.stringify(zoom));
+    }, [zoom]);
 
     const stopIcon = new L.Icon({
         iconUrl: 'https://www.pngall.com/wp-content/uploads/2016/07/Arrow-Free-Download-PNG.png',
@@ -32,25 +62,16 @@ const Map = ({locations, coordinates = [43.274, -115.983]}) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {coordinates.map((position, index) =>
-                    <Marker key={index} position={position} icon={index===coordinates.length-1 ? spaceShipIcon : stopIcon}/>
+                    <Marker key={index} position={position}
+                            icon={index === coordinates.length - 1 ? spaceShipIcon : stopIcon}/>
                 )}
                 <Polyline positions={coordinates} color="red"/>
-                <MapUpdater coordinates={coordinates}/>
+                <MapUpdater coordinates={coordinates} zoom={zoom}/>
+                <ZoomListener setZoom={setZoom}/>
             </MapContainer>
         </div>
     );
 };
 
-const MapUpdater = ({coordinates}) => {
-    const map = useMap();
-
-    useEffect(() => {
-        if (coordinates.length > 0) {
-            map.setView(coordinates.at(-1), ZOOM);
-        }
-    }, [coordinates, map]);
-
-    return null;
-};
 
 export default Map;
