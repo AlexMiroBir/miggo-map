@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Card.module.css';
 
-const Card = ({locations}) => {
+const InfoCard = ({locations}) => {
     const location = locations.at(-1) ?? {};
     return (
         <div className={styles.Container}>
@@ -15,4 +15,4 @@ const Card = ({locations}) => {
     );
 };
 
-export default Card;
+export default InfoCard;

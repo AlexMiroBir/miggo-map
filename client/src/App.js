@@ -4,7 +4,7 @@ import styles from './App.module.css';
 import "leaflet/dist/leaflet.css";
 import {useEffect} from 'react';
 import axios from 'axios';
-import Card from './Components/Card/Card';
+import InfoCard from './Components/Card/InfoCard';
 
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
     return (
         <div className={styles.Container}>
             <Map locations={locations} coordinates={coordinates}/>
-            <div>
-                <Card locations={locations}/>
+            <div className={styles.InfoCardContainer}>
+                <InfoCard locations={locations}/>
                 <button onClick={updateLocations}>Refresh</button>
             </div>
         </div>
