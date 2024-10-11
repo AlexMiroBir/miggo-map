@@ -1,3 +1,7 @@
 .Container {
     display: flex;
 }
+
+.InfoCardContainer{
+    padding: 10px;
+}
