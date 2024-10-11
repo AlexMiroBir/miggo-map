@@ -18,7 +18,8 @@ function App() {
             setLocations(response.data);
             const locationCoordinates = response.data.map(location => [location.latitude, location.longitude]);
             setCoordinates(locationCoordinates);
-        } catch (ignore) {
+        } catch (error) {
+            alert('Something went wrong! Please try again later');
         }
     }
 
