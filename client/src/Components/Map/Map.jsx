@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {MapContainer, Marker, TileLayer, useMap, useMapEvents} from 'react-leaflet'
-import { WrappedPolyline } from './Polyline/Polyline';
-import styles from './Map.module.css'
+import {WrappedPolyline} from './Polyline/Polyline';
+import {NightRegion} from 'react-leaflet-night-region'
 import L from "leaflet";
+
+import styles from './Map.module.css'
 
 
 const ZOOM = 2
@@ -23,7 +25,7 @@ const MapUpdater = ({coordinates, zoom}) => {
         if (coordinates.length > 0) {
             map.setView(coordinates.at(-1), zoom);
         }
-    }, [coordinates,zoom, map]);
+    }, [coordinates, zoom, map]);
 
     return null;
 };
@@ -64,6 +66,7 @@ const Map = ({coordinates}) => {
                 <WrappedPolyline positions={coordinates} color="red"/>
                 <MapUpdater coordinates={coordinates} zoom={zoom}/>
                 <ZoomListener setZoom={setZoom}/>
+                <NightRegion fillColor='#00345c' color='#001a2e' refreshInterval={1000}/>
             </MapContainer>
         </div>
     );
