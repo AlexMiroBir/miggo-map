@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {MapContainer, Marker, Polyline, TileLayer, useMap, useMapEvents} from 'react-leaflet'
+import {MapContainer, Marker, TileLayer, useMap, useMapEvents} from 'react-leaflet'
+import { WrappedPolyline } from './Polyline/Polyline';
 import styles from './Map.module.css'
 import L from "leaflet";
 
-const ZOOM = 0
+
+const ZOOM = 2
 
 const ZoomListener = ({setZoom}) => {
     const map = useMapEvents({
@@ -21,7 +23,7 @@ const MapUpdater = ({coordinates, zoom}) => {
         if (coordinates.length > 0) {
             map.setView(coordinates.at(-1), zoom);
         }
-    }, [coordinates, map]);
+    }, [coordinates,zoom, map]);
 
     return null;
 };
@@ -48,14 +50,18 @@ const Map = ({coordinates}) => {
 
     return (
         <div className={styles.MapContainer}>
-            <MapContainer center={coordinates.at(-1)} zoom={ZOOM} scrollWheelZoom={true}
-                          className={styles.MapContainer}>
+            <MapContainer
+                center={coordinates.at(-1)}
+                zoom={ZOOM}
+                scrollWheelZoom={true}
+                worldCopyJump={true}
+                className={styles.MapContainer}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={coordinates.at(-1)} icon={spaceShipIcon}/>
-                <Polyline positions={coordinates} color="red"/>
+                <WrappedPolyline positions={coordinates} color="red"/>
                 <MapUpdater coordinates={coordinates} zoom={zoom}/>
                 <ZoomListener setZoom={setZoom}/>
             </MapContainer>

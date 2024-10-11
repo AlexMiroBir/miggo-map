@@ -19,7 +19,7 @@ function App() {
             const locationCoordinates = response.data.map(location => [location.latitude, location.longitude]);
             setCoordinates(locationCoordinates);
         } catch (error) {
-            alert('Something went wrong! Please try again later');
+            alert('Something went wrong! The location may not be updated');
         }
     }
 
