@@ -8,7 +8,6 @@ import {PORT} from './constants.js';
 
 const app = express();
 
-//TODO: check proper working
 setInterval(async () => {
     await FileService.refreshLocationData()
 }, 60 * 60 * 1000); // once an hour
