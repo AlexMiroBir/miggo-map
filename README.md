@@ -1,7 +1,7 @@
 ISS TRACKER
 
 PURPOSE:
-Application for tracking how ISS moved last 24 hours;
+Application for tracking how ISS is moving in real time with collection history last 24 hours;
 
 Features: 
 - Updating data each 20 seconds or by "REFRESH" button click;
