@@ -28,8 +28,12 @@ class FileService {
     }
 
     static cleanOldData(data = []) {
-        const now = Date.now();
-        return data.filter(item => now - (item.timestamp * 1000) <= MAX_LOCATION_HISTORY_AGE);
+        try {
+            const now = Date.now();
+            return data.filter(item => now - (item.timestamp * 1000) <= MAX_LOCATION_HISTORY_AGE);
+        } catch (ignore) {
+            return [];
+        }
     }
 
     static isDataChanged(oldData = [], newData = []) {
