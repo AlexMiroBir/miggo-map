@@ -54,7 +54,7 @@ const Map = ({coordinates}) => {
         <div className={styles.MapContainer}>
             <MapContainer
                 center={coordinates.at(-1)}
-                zoom={ZOOM}
+                zoom={zoom}
                 scrollWheelZoom={true}
                 worldCopyJump={true}
                 className={styles.MapContainer}>

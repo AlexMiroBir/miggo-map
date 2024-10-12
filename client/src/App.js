@@ -3,7 +3,6 @@ import Map from './Components/Map/Map';
 import styles from './App.module.css';
 import "leaflet/dist/leaflet.css";
 import {useEffect} from 'react';
-import axios from 'axios';
 import InfoCard from './Components/Card/InfoCard';
 
 
@@ -14,9 +13,10 @@ function App() {
 
     const updateLocations = async () => {
         try {
-            const response = await axios.get(`http://localhost:3008/location`)
-            setLocations(response.data);
-            const locationCoordinates = response.data.map(location => [location.latitude, location.longitude]);
+            const response = await fetch(`http://localhost:3008/location`)
+            const locations = await response.json();
+            setLocations(locations);
+            const locationCoordinates = locations.map(location => [location.latitude, location.longitude]);
             setCoordinates(locationCoordinates);
         } catch (error) {
             alert('Something went wrong! The location may not be updated');
